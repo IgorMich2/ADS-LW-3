@@ -3,6 +3,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include <cmath>
 using namespace std;
 
 template <class T>
@@ -26,6 +27,9 @@ public:
 	void minheap();
 	bool isempty();
 	bool isfull();
+	void Find_k_min_1(int k);
+	void Find_k_min_2(int k);
+	void Find_k_min_3(int k);
 };
 
 template <class T>
@@ -217,6 +221,43 @@ bool Heap<T> ::isempty()
 	}
 	else return false;
 }
+template <class T>
+void Heap<T>::Find_k_min_1(int k) {
+	int i, j, len = sizeof(arr) / sizeof(arr[0]);
+
+	for (i = 0; i < len - 1; i++) 
+		for (j = 0; j < len - i - 1; j++)
+			if (arr[j] > arr[j + 1])
+				swap(arr[j], arr[j + 1]);
+	cout << "k min: " << endl;
+	for (int i = 0; i < k; i++) {
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+}
+
+template <class T>
+void Heap<T>::Find_k_min_2(int k) {
+	minheap();
+	cout << "k min: " << endl;
+	int l = arr.size();
+	int n = min(k, l);
+	for (int i = 0; i < n; i++) {
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+}
+
+template <class T>
+void Heap<T>::Find_k_min_3(int k) {
+	maxheap();
+	cout << "k min: " << endl;
+	int len = arr.size();
+	for (int i = len - 1; i > len - k - 1; i--) {
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+}
 
 int main()
 {
@@ -238,7 +279,9 @@ int main()
 	h.minheap();
 	h.display();
 
-
+	h.Find_k_min_1(2);
+	h.Find_k_min_2(2);
+	h.Find_k_min_3(2);
 
 	return 0;
 }
