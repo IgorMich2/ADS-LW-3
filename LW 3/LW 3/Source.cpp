@@ -13,10 +13,6 @@ class Heap
 	void reHeapUp(int child);
 	void reHeapUpMin(int child);
 	void reHeapDown(int parent);
-	int getLeftChild(int parent);
-	int getRightChild(int parent);
-	int getParent(int child);
-
 public:
 	Heap() {}
 	void insertKey(T date);
@@ -29,6 +25,9 @@ public:
 	void Find_k_min_1(int k);
 	void Find_k_min_2(int k);
 	void Find_k_min_3(int k);
+	int getLeftChild(int parent);
+	int getRightChild(int parent);
+	int getParent(int child);
 };
 
 template <class T>
@@ -40,13 +39,23 @@ int Heap<T> ::getHeapSize()
 template <class T>
 int Heap<T> ::getLeftChild(int parent)
 {
-	return 2 * parent + 1;
+	for (int i = 0; i < arr.size(); i++) {
+		if (arr[i] == parent) {
+			return arr[2 * i + 1];
+		}
+	}
+	return 0;
 }
 
 template <class T>
 int Heap<T> ::getRightChild(int parent)
 {
-	return 2 * parent + 2;
+	for (int i = 0; i < arr.size(); i++) {
+		if (arr[i] == parent) {
+			return arr[2 * i + 2];
+		}
+	}
+	return 0;
 }
 
 template <class T>
@@ -246,6 +255,8 @@ int main()
 	}
 	cout << "Heap is: " << endl;
 	h.display();
+	cout<<h.getLeftChild(10)<<endl;
+	cout << h.getRightChild(10) << endl;
 
 	cout << "Maxheap: " << endl;
 	h.maxheap();
